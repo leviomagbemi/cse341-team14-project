@@ -5,7 +5,7 @@ const doc = {
         title: "Sleeve & Stitch Men's Shirt API",
         description: "API for managing a Men's Shirt Retail Shop, including Inventory, Orders, Categories, and Suppliers."
     },
-    host: 'localhost:3000', // we will change this to Render URL later
+    host: process.env.APP_BASE_URL, // we will change this to Render URL later
     schemes: ['http', 'https'],
 };
 

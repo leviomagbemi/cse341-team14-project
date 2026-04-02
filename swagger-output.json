@@ -5,7 +5,6 @@
     "description": "API for managing a Men's Shirt Retail Shop, including Inventory, Orders, Categories, and Suppliers.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http",
