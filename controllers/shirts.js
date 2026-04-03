@@ -48,10 +48,43 @@ const createShirt = async (req, res) => {
     }
 };
 
-// someone should add updateShirt and deleteShirt functions similarly...
+const updateShirt = async (req, res) => {
+    // #swagger.tags = ['Shirts']
+    const shirtId = new ObjectId(req.params.id);
+    const shirt = {
+        productName: req.body.productName,
+        sleeveLength: req.body.sleeveLength,
+        fabricType: req.body.fabricType,
+        fit: req.body.fit,
+        color: req.body.color,
+        price: req.body.price,
+        size: req.body.size,
+        stockQuantity: req.body.stockQuantity
+    };
+    const response = await mongodb.getDb().db().collection('shirts').updateOne({ _id: shirtId }, { $set: shirt });
+    if (response.acknowledged) {
+        res.status(200).json(response);
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while updating the shirt.');
+    }
+};
+
+const deleteShirt = async (req, res) => {
+    // #swagger.tags = ['Shirts']
+    const shirtId = new ObjectId(req.params.id);
+    const response = await mongodb.getDb().db().collection('shirts').deleteOne({ _id: shirtId });
+    if (response.deletedCount > 0) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json({ error: 'Shirt not found.' });
+    }
+};
+
 
 module.exports = {
     getAll,
     getSingle,
-    createShirt
+    createShirt,
+    updateShirt,
+    deleteShirt
 };
