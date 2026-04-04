@@ -15,10 +15,10 @@ router.use('/', require('./swagger'));
 // router.use('/auth', authRouter);
 
 // 3. Collection Routes
-router.use('/shirts', shirtRouter);
-router.use('/orders', orderRouter);
-router.use('/categories', categoryRouter);
-router.use('/suppliers', supplierRouter);
+router.use('/shirts', /* #swagger.tags = ['Shirts'] */ shirtRouter);
+router.use('/orders', /* #swagger.tags = ['Orders'] */ orderRouter);
+router.use('/categories', /* #swagger.tags = ['Categories'] */ categoryRouter);
+router.use('/suppliers', /* #swagger.tags = ['Suppliers'] */ supplierRouter);
 
 // Root route to show API documentation link
 router.get('/', (req, res) => {

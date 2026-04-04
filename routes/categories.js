@@ -11,10 +11,10 @@ router.get('/', categoriesController.getAll);
 router.get('/:id', categoriesController.getSingle);
 
 // POST
-router.post('/', validate(schemas.category), categoriesController.createCategory);
+router.post('/', validate(schemas.category), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Category' } } */ categoriesController.createCategory);
 
 // PUT
-router.put('/:id', validate(schemas.category), categoriesController.updateCategory);
+router.put('/:id', validate(schemas.category), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Category' } } */ categoriesController.updateCategory);
 
 // DELETE
 router.delete('/:id', categoriesController.deleteCategory);

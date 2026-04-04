@@ -7,8 +7,8 @@ const schemas = require('../middleware/validator'); // Joi schemas
 
 router.get('/', ordersController.getAll);
 router.get('/:id', ordersController.getSingle);
-router.post('/', validate(schemas.order), validateExistence({ shirtId: 'shirts' }), ordersController.createOrder);
-router.put('/:id', validate(schemas.order), validateExistence({ shirtId: 'shirts' }), ordersController.updateOrder);
+router.post('/', validate(schemas.order), validateExistence({ shirtId: 'shirts' }), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Order' } } */ ordersController.createOrder);
+router.put('/:id', validate(schemas.order), validateExistence({ shirtId: 'shirts' }), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Order' } } */ ordersController.updateOrder);
 router.delete('/:id', ordersController.deleteOrder);
 
 module.exports = router;

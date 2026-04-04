@@ -11,10 +11,10 @@ router.get('/', suppliersController.getAll);
 router.get('/:id', suppliersController.getSingle);
 
 // POST new supplier
-router.post('/', validate(schemas.supplier), suppliersController.createSupplier);
+router.post('/', validate(schemas.supplier), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Supplier' } } */ suppliersController.createSupplier);
 
 // PUT update supplier
-router.put('/:id', validate(schemas.supplier), suppliersController.updateSupplier);
+router.put('/:id', validate(schemas.supplier), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Supplier' } } */ suppliersController.updateSupplier);
 
 // DELETE supplier
 router.delete('/:id', suppliersController.deleteSupplier);

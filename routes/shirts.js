@@ -13,10 +13,10 @@ router.get('/', shirtsController.getAll);
 router.get('/:id', shirtsController.getSingle);
 
 // POST new shirt (Protected + Validated)
-router.post('/', validate(schemas.shirt), validateExistence({ supplierId: 'suppliers', categoryId: 'categories' }), shirtsController.createShirt);
+router.post('/', validate(schemas.shirt), validateExistence({ supplierId: 'suppliers', categoryId: 'categories' }), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Shirt' } } */ shirtsController.createShirt);
 
 // PUT update shirt (Protected + Validated)
-router.put('/:id', validate(schemas.shirt), validateExistence({ supplierId: 'suppliers', categoryId: 'categories' }), shirtsController.updateShirt);
+router.put('/:id', validate(schemas.shirt), validateExistence({ supplierId: 'suppliers', categoryId: 'categories' }), /* #swagger.parameters['body'] = { in: 'body', schema: { $ref: '#/definitions/Shirt' } } */ shirtsController.updateShirt);
 
 // DELETE shirt (Protected)
 router.delete('/:id', validate(schemas.shirt), shirtsController.deleteShirt);
