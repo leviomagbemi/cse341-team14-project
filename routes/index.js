@@ -20,9 +20,14 @@ router.use('/shirts', shirtRouter);
 // router.use('/categories', categoryRouter);
 // router.use('/suppliers', supplierRouter);
 
-// Root route to show login status
+// Root route to show API documentation link
 router.get('/', (req, res) => {
-    res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged out");
+    res.status(200).json({
+        success: true,
+        message: 'Sleeve & Stitch Men\'s Shirt API',
+        documentation: '/api-docs',
+        version: '1.0.0'
+    });
 });
 
 module.exports = router;
