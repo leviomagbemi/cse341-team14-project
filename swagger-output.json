@@ -445,439 +445,100 @@
     "Shirt": {
       "type": "object",
       "properties": {
-        "type": {
+        "productName": {
           "type": "string",
-          "example": "object"
+          "example": "Classic Cotton Polo"
         },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439011"
-                }
-              }
-            },
-            "productName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Classic Cotton Polo"
-                }
-              }
-            },
-            "sleeveLength": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Short"
-                },
-                "enum": {
-                  "type": "array",
-                  "example": [
-                    "Short",
-                    "Long"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "fabricType": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Cotton"
-                },
-                "enum": {
-                  "type": "array",
-                  "example": [
-                    "Cotton",
-                    "Linen",
-                    "Polyester",
-                    "Blend"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "fit": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Regular"
-                },
-                "enum": {
-                  "type": "array",
-                  "example": [
-                    "Slim",
-                    "Regular",
-                    "Relaxed"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "color": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Navy Blue"
-                }
-              }
-            },
-            "price": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "number"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 49.99
-                }
-              }
-            },
-            "size": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "M"
-                },
-                "enum": {
-                  "type": "array",
-                  "example": [
-                    "S",
-                    "M",
-                    "L",
-                    "XL",
-                    "XXL"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "stockQuantity": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "integer"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 150
-                }
-              }
-            },
-            "supplierId": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439012"
-                }
-              }
-            },
-            "categoryId": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439014"
-                }
-              }
-            }
-          }
+        "sleeveLength": {
+          "type": "string",
+          "example": "Short"
+        },
+        "fabricType": {
+          "type": "string",
+          "example": "Cotton"
+        },
+        "fit": {
+          "type": "string",
+          "example": "Regular"
+        },
+        "color": {
+          "type": "string",
+          "example": "Navy Blue"
+        },
+        "price": {
+          "type": "number",
+          "example": 49.99
+        },
+        "size": {
+          "type": "string",
+          "example": "M"
+        },
+        "stockQuantity": {
+          "type": "number",
+          "example": 150
+        },
+        "supplierId": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439012"
+        },
+        "categoryId": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439014"
         }
       }
     },
     "Order": {
       "type": "object",
       "properties": {
-        "type": {
+        "customerEmail": {
           "type": "string",
-          "example": "object"
+          "example": "customer@example.com"
         },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439013"
-                }
-              }
-            },
-            "customerEmail": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "customer@example.com"
-                }
-              }
-            },
-            "shirtId": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439011"
-                }
-              }
-            },
-            "quantity": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "integer"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 2
-                }
-              }
-            },
-            "status": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Pending"
-                },
-                "enum": {
-                  "type": "array",
-                  "example": [
-                    "Pending",
-                    "Shipped",
-                    "Delivered",
-                    "Cancelled"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
+        "shirtId": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439011"
+        },
+        "quantity": {
+          "type": "number",
+          "example": 2
+        },
+        "status": {
+          "type": "string",
+          "example": "Pending"
         }
       }
     },
     "Category": {
       "type": "object",
       "properties": {
-        "type": {
+        "categoryName": {
           "type": "string",
-          "example": "object"
+          "example": "Summer Collection"
         },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439014"
-                }
-              }
-            },
-            "categoryName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Summer Collection"
-                }
-              }
-            },
-            "description": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Light and breathable shirts for warm weather"
-                }
-              }
-            },
-            "season": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Summer"
-                },
-                "enum": {
-                  "type": "array",
-                  "example": [
-                    "Spring",
-                    "Summer",
-                    "Fall",
-                    "Winter",
-                    "All-Season"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
+        "description": {
+          "type": "string",
+          "example": "Light and breathable shirts for warm weather"
+        },
+        "season": {
+          "type": "string",
+          "example": "Summer"
         }
       }
     },
     "Supplier": {
       "type": "object",
       "properties": {
-        "type": {
+        "supplierName": {
           "type": "string",
-          "example": "object"
+          "example": "Premium Fabrics Inc."
         },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "507f1f77bcf86cd799439012"
-                }
-              }
-            },
-            "supplierName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Premium Fabrics Inc."
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "supplier@fabrics.com"
-                }
-              }
-            },
-            "phone": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "+1-555-123-4567"
-                }
-              }
-            }
-          }
+        "email": {
+          "type": "string",
+          "example": "supplier@fabrics.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+1-555-123-4567"
         }
       }
     }
