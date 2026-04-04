@@ -20,14 +20,9 @@ router.use('/orders', /* #swagger.tags = ['Orders'] */ orderRouter);
 router.use('/categories', /* #swagger.tags = ['Categories'] */ categoryRouter);
 router.use('/suppliers', /* #swagger.tags = ['Suppliers'] */ supplierRouter);
 
-// Root route to show API documentation link
+// Root route
 router.get('/', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Sleeve & Stitch Men\'s Shirt API',
-        documentation: '/api-docs',
-        version: '1.0.0'
-    });
+    res.send('Logged out');
 });
 
 module.exports = router;
