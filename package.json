@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js && node swagger.js",
+    "start": "node swagger.js && node server.js",
     "dev": "nodemon server.js",
     "swagger": "node swagger.js"
   },
