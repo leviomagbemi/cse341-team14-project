@@ -1,12 +1,14 @@
 const swaggerAutogen = require('swagger-autogen')();
+require('dotenv').config();
 
 const doc = {
     info: {
         title: "Sleeve & Stitch Men's Shirt API",
         description: "API for managing a Men's Shirt Retail Shop, including Inventory, Orders, Categories, and Suppliers."
     },
-    host: process.env.APP_BASE_URL, // we will change this to Render URL later
-    schemes: ['http', 'https'],
+    host: process.env.APP_BASE_URL || 'localhost:8080',
+    basePath: '/',
+    schemes: process.env.NODE_ENV === 'production' ? ['https'] : ['http', 'https'],
     definitions: {
         Shirt: {
             type: 'object',

@@ -20,17 +20,12 @@ app
     }))
     .use(passport.initialize())
     .use(passport.session())
-    .use((req, res, next) => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
-        );
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        next();
-    })
-    .use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }))
-    .use(cors({ origin: '*' }))
+    .use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Z-Key'],
+        credentials: false
+    }))
     .use('/', require('./routes')); // This points to your routes/index.js
 
 // 404 Not Found Handler - Must come after all route definitions
