@@ -41,7 +41,7 @@ const createCRUDController = (collectionName, idParamName = 'id') => {
                     const existing = await mongodb.getDb().db().collection(collectionName)
                         .findOne({ [uniqueField]: data[uniqueField] });
                     if (existing) {
-                        return res.status(409).json({
+                        return res.status(400).json({
                             success: false,
                             message: `A ${collectionName.slice(0, -1)} with that ${uniqueField} already exists.`
                         });
@@ -70,7 +70,7 @@ const createCRUDController = (collectionName, idParamName = 'id') => {
                     const existing = await mongodb.getDb().db().collection(collectionName)
                         .findOne({ [uniqueField]: data[uniqueField], _id: { $ne: id } });
                     if (existing) {
-                        return res.status(409).json({
+                        return res.status(400).json({
                             success: false,
                             message: `Another ${collectionName.slice(0, -1)} with that ${uniqueField} already exists.`
                         });
