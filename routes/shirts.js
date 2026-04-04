@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const shirtsController = require('../controllers/shirts');
 // const { isAuthenticated } = require('../middleware/authenticate');
-const validate = require('../middleware/validator');
+const validate = require('../middleware/validate');
 const schemas = require('../middleware/validator'); // Joi schemas
 
 // GET all shirts (Public)
@@ -12,12 +12,12 @@ router.get('/', shirtsController.getAll);
 router.get('/:id', shirtsController.getSingle);
 
 // POST new shirt (Protected + Validated)
-// router.post('/', isAuthenticated, validate(schemas.shirt), shirtsController.createShirt);
+router.post('/', validate(schemas.shirt), shirtsController.createShirt);
 
 // PUT update shirt (Protected + Validated)
-// router.put('/:id', isAuthenticated, validate(schemas.shirt), shirtsController.updateShirt);
+router.put('/:id', validate(schemas.shirt), shirtsController.updateShirt);
 
 // DELETE shirt (Protected)
-// router.delete('/:id', isAuthenticated, shirtsController.deleteShirt);
+router.delete('/:id', validate(schemas.shirt), shirtsController.deleteShirt);
 
 module.exports = router;
