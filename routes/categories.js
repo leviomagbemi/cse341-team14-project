@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const categoriesController = require('../controllers/categories');
+const validate = require('../middleware/validate');
+const schemas = require('../middleware/validator'); // Joi schemas
 
 // GET all
 router.get('/', categoriesController.getAll);
@@ -9,10 +11,10 @@ router.get('/', categoriesController.getAll);
 router.get('/:id', categoriesController.getSingle);
 
 // POST
-router.post('/', categoriesController.createCategory);
+router.post('/', validate(schemas.category), categoriesController.createCategory);
 
 // PUT
-router.put('/:id', categoriesController.updateCategory);
+router.put('/:id', validate(schemas.category), categoriesController.updateCategory);
 
 // DELETE
 router.delete('/:id', categoriesController.deleteCategory);

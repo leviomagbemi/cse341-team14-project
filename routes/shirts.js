@@ -3,6 +3,7 @@ const router = express.Router();
 const shirtsController = require('../controllers/shirts');
 // const { isAuthenticated } = require('../middleware/authenticate');
 const validate = require('../middleware/validate');
+const validateExistence = require('../middleware/existenceValidate');
 const schemas = require('../middleware/validator'); // Joi schemas
 
 // GET all shirts (Public)
@@ -12,10 +13,10 @@ router.get('/', shirtsController.getAll);
 router.get('/:id', shirtsController.getSingle);
 
 // POST new shirt (Protected + Validated)
-router.post('/', validate(schemas.shirt), shirtsController.createShirt);
+router.post('/', validate(schemas.shirt), validateExistence({ supplierId: 'suppliers', categoryId: 'categories' }), shirtsController.createShirt);
 
 // PUT update shirt (Protected + Validated)
-router.put('/:id', validate(schemas.shirt), shirtsController.updateShirt);
+router.put('/:id', validate(schemas.shirt), validateExistence({ supplierId: 'suppliers', categoryId: 'categories' }), shirtsController.updateShirt);
 
 // DELETE shirt (Protected)
 router.delete('/:id', validate(schemas.shirt), shirtsController.deleteShirt);
