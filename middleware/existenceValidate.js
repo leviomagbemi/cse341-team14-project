@@ -20,7 +20,7 @@ const validateExistence = (fieldMappings) => {
 
                 // Validate that we have a valid MongoDB ObjectId format
                 if (!ObjectId.isValid(fieldValue)) {
-                    return res.status(412).json({
+                    return res.status(400).json({
                         success: false,
                         message: 'Validation failed',
                         data: `${fieldName} is not a valid MongoDB ObjectId`
@@ -33,7 +33,7 @@ const validateExistence = (fieldMappings) => {
                     .findOne({ _id: new ObjectId(fieldValue) });
 
                 if (!existingDocument) {
-                    return res.status(412).json({
+                    return res.status(400).json({
                         success: false,
                         message: 'Validation failed',
                         data: `${fieldName} references a ${collectionName.slice(0, -1)} that does not exist`
