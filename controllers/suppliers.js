@@ -13,7 +13,7 @@ const supplierDataMapper = (body) => ({
 module.exports = {
     getAll: base.getAll,
     getSingle: base.getSingle,
-    createSupplier: base.create(supplierDataMapper),
-    updateSupplier: base.update(supplierDataMapper),
+    createSupplier: base.create(supplierDataMapper, 'email'),
+    updateSupplier: base.update(supplierDataMapper, 'email'),
     deleteSupplier: base.delete
 };

@@ -13,7 +13,7 @@ const categoryDataMapper = (body) => ({
 module.exports = {
     getAll: base.getAll,
     getSingle: base.getSingle,
-    createCategory: base.create(categoryDataMapper),
-    updateCategory: base.update(categoryDataMapper),
+    createCategory: base.create(categoryDataMapper, 'categoryName'),
+    updateCategory: base.update(categoryDataMapper, 'categoryName'),
     deleteCategory: base.delete
 };  

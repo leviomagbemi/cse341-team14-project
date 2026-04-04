@@ -33,9 +33,20 @@ const createCRUDController = (collectionName, idParamName = 'id') => {
             }
         },
 
-        create: (dataMapper) => async (req, res, next) => {
+        create: (dataMapper, uniqueField) => async (req, res, next) => {
             try {
                 const data = dataMapper(req.body);
+                // Check for duplicate if a unique field is specified
+                if (uniqueField && data[uniqueField]) {
+                    const existing = await mongodb.getDb().db().collection(collectionName)
+                        .findOne({ [uniqueField]: data[uniqueField] });
+                    if (existing) {
+                        return res.status(409).json({
+                            success: false,
+                            message: `A ${collectionName.slice(0, -1)} with that ${uniqueField} already exists.`
+                        });
+                    }
+                }
                 const response = await mongodb.getDb().db().collection(collectionName).insertOne(data);
                 if (response.acknowledged) {
                     res.status(201).json(response);
@@ -50,10 +61,21 @@ const createCRUDController = (collectionName, idParamName = 'id') => {
             }
         },
 
-        update: (dataMapper) => async (req, res, next) => {
+        update: (dataMapper, uniqueField) => async (req, res, next) => {
             try {
                 const id = new ObjectId(req.params[idParamName]);
                 const data = dataMapper(req.body);
+                // Check for duplicate if a unique field is specified (exclude self)
+                if (uniqueField && data[uniqueField]) {
+                    const existing = await mongodb.getDb().db().collection(collectionName)
+                        .findOne({ [uniqueField]: data[uniqueField], _id: { $ne: id } });
+                    if (existing) {
+                        return res.status(409).json({
+                            success: false,
+                            message: `Another ${collectionName.slice(0, -1)} with that ${uniqueField} already exists.`
+                        });
+                    }
+                }
                 const response = await mongodb.getDb().db().collection(collectionName).updateOne({ _id: id }, { $set: data });
                 if (response.acknowledged) {
                     res.status(200).json(response);
