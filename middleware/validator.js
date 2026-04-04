@@ -10,7 +10,9 @@ const schemas = {
         color: Joi.string().required(),
         price: Joi.number().positive().required(),
         size: Joi.string().valid('S', 'M', 'L', 'XL', 'XXL').required(),
-        stockQuantity: Joi.number().integer().min(0).required()
+        stockQuantity: Joi.number().integer().min(0).required(),
+        supplierId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(), // Validates MongoDB ObjectId
+        categoryId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required() // Validates MongoDB ObjectId
     }),
 
     // 2. Orders

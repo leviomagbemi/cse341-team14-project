@@ -5,6 +5,8 @@ const passport = require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
+const errorHandler = require('./middleware/errorHandler');
+const AppError = require('./errors/AppErrors');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,6 +32,15 @@ app
     .use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }))
     .use(cors({ origin: '*' }))
     .use('/', require('./routes')); // This points to your routes/index.js
+
+// 404 Not Found Handler - Must come after all route definitions
+app.use((req, res, next) => {
+    const err = new AppError(`The requested resource was not found on the server`, 404);
+    next(err);
+});
+
+// Global Error Handling Middleware - Must be LAST
+app.use(errorHandler);
 
 // Passport Setup (Reuse your logic from the last project here)
 passport.use(new GitHubStrategy({
