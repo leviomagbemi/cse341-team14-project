@@ -17,7 +17,7 @@ router.post('/', validate(schemas.shirt), shirtsController.createShirt);
 // PUT update shirt (Protected + Validated)
 router.put('/:id', validate(schemas.shirt), shirtsController.updateShirt);
 
-// DELETE shirt (Protected)
-router.delete('/:id', validate(schemas.shirt), shirtsController.deleteShirt);
+// DELETE shirt
+router.delete('/:id', shirtsController.deleteShirt);
 
 module.exports = router;

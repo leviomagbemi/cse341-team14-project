@@ -50,22 +50,28 @@ const createShirt = async (req, res) => {
 
 const updateShirt = async (req, res) => {
     // #swagger.tags = ['Shirts']
-    const shirtId = new ObjectId(req.params.id);
-    const shirt = {
-        productName: req.body.productName,
-        sleeveLength: req.body.sleeveLength,
-        fabricType: req.body.fabricType,
-        fit: req.body.fit,
-        color: req.body.color,
-        price: req.body.price,
-        size: req.body.size,
-        stockQuantity: req.body.stockQuantity
-    };
-    const response = await mongodb.getDb().db().collection('shirts').updateOne({ _id: shirtId }, { $set: shirt });
-    if (response.acknowledged) {
-        res.status(200).json(response);
-    } else {
-        res.status(500).json(response.error || 'Some error occurred while updating the shirt.');
+    try {
+        const shirtId = new ObjectId(req.params.id);
+        const shirt = {
+            productName: req.body.productName,
+            sleeveLength: req.body.sleeveLength,
+            fabricType: req.body.fabricType,
+            fit: req.body.fit,
+            color: req.body.color,
+            price: req.body.price,
+            size: req.body.size,
+            stockQuantity: req.body.stockQuantity
+        };
+        const response = await mongodb.getDb().db().collection('shirts').updateOne({ _id: shirtId }, { $set: shirt });
+
+        if (response.acknowledged) {
+            // Change 200 to 204 to match professional standards and your test
+            res.status(204).send();
+        } else {
+            res.status(500).json('Some error occurred while updating the shirt.');
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 };
 
