@@ -65,7 +65,6 @@ const updateShirt = async (req, res) => {
         const response = await mongodb.getDb().db().collection('shirts').updateOne({ _id: shirtId }, { $set: shirt });
 
         if (response.acknowledged) {
-            // Change 200 to 204 to match professional standards and your test
             res.status(204).send();
         } else {
             res.status(500).json('Some error occurred while updating the shirt.');
