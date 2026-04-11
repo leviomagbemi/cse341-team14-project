@@ -5,18 +5,18 @@ const validate = require('../middleware/validate');
 const schemas = require('../middleware/validator'); // Joi schemas
 
 // GET all
-router.get('/', categoriesController.getAll);
+router.get('/', /* #swagger.tags = ['Categories'] */ categoriesController.getAll);
 
 // GET single
-router.get('/:id', categoriesController.getSingle);
+router.get('/:id', /* #swagger.tags = ['Categories'] */ categoriesController.getSingle);
 
 // POST
-router.post('/', validate(schemas.category), categoriesController.createCategory);
+router.post('/', validate(schemas.category), /* #swagger.tags = ['Categories'] */ categoriesController.createCategory);
 
 // PUT
-router.put('/:id', validate(schemas.category), categoriesController.updateCategory);
+router.put('/:id', validate(schemas.category), /* #swagger.tags = ['Categories'] */ categoriesController.updateCategory);
 
 // DELETE
-router.delete('/:id', categoriesController.deleteCategory);
+router.delete('/:id', /* #swagger.tags = ['Categories'] */ categoriesController.deleteCategory);
 
 module.exports = router;
