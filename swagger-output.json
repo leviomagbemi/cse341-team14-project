@@ -22,6 +22,96 @@
         }
       }
     },
+    "/auth/status": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get current authentication status",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/github": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Start GitHub OAuth login",
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "GitHub OAuth callback",
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login-failed": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "GitHub OAuth failure handler",
+        "description": "",
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get current authenticated user",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Log out current user",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
     "/api-docs": {
       "get": {
         "description": "",
@@ -39,8 +129,8 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -53,12 +143,29 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Shirt payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Shirt"
+              "$ref": "#/definitions/Shirt",
+              "example": {
+                "productName": "Classic Cotton Polo",
+                "sleeveLength": "Short",
+                "fabricType": "Cotton",
+                "fit": "Regular",
+                "color": "Navy Blue",
+                "price": 49.99,
+                "size": "M",
+                "stockQuantity": 150,
+                "supplierId": "507f1f77bcf86cd799439012",
+                "categoryId": "507f1f77bcf86cd799439014"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           },
@@ -79,12 +186,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Shirt ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -98,17 +206,35 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Shirt ID"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Shirt update payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Shirt"
+              "$ref": "#/definitions/Shirt",
+              "example": {
+                "productName": "Classic Cotton Polo",
+                "sleeveLength": "Short",
+                "fabricType": "Cotton",
+                "fit": "Regular",
+                "color": "Navy Blue",
+                "price": 49.99,
+                "size": "M",
+                "stockQuantity": 150,
+                "supplierId": "507f1f77bcf86cd799439012",
+                "categoryId": "507f1f77bcf86cd799439014"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           },
@@ -127,12 +253,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Shirt ID"
           }
         ],
         "responses": {
-          "412": {
-            "description": "Precondition Failed"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -144,8 +271,8 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -158,12 +285,23 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Order payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Order"
+              "$ref": "#/definitions/Order",
+              "example": {
+                "customerEmail": "customer@example.com",
+                "shirtId": "507f1f77bcf86cd799439011",
+                "quantity": 2,
+                "status": "Pending"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           },
@@ -184,12 +322,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Order ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -203,17 +342,29 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Order ID"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Order update payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Order"
+              "$ref": "#/definitions/Order",
+              "example": {
+                "customerEmail": "customer@example.com",
+                "shirtId": "507f1f77bcf86cd799439011",
+                "quantity": 2,
+                "status": "Pending"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           },
@@ -232,12 +383,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Order ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -249,8 +401,8 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -263,12 +415,22 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Category payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Category"
+              "$ref": "#/definitions/Category",
+              "example": {
+                "categoryName": "Summer Collection",
+                "description": "Light and breathable shirts for warm weather",
+                "season": "Summer"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           }
@@ -286,12 +448,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Category ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -305,17 +468,28 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Category ID"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Category update payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Category"
+              "$ref": "#/definitions/Category",
+              "example": {
+                "categoryName": "Summer Collection",
+                "description": "Light and breathable shirts for warm weather",
+                "season": "Summer"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           }
@@ -331,12 +505,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Category ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -348,8 +523,8 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -362,12 +537,22 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Supplier payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Supplier"
+              "$ref": "#/definitions/Supplier",
+              "example": {
+                "supplierName": "Premium Fabrics Inc.",
+                "email": "supplier@fabrics.com",
+                "phone": "+1-555-123-4567"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           }
@@ -385,12 +570,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Supplier ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -404,17 +590,28 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Supplier ID"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Supplier update payload",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/Supplier"
+              "$ref": "#/definitions/Supplier",
+              "example": {
+                "supplierName": "Premium Fabrics Inc.",
+                "email": "supplier@fabrics.com",
+                "phone": "+1-555-123-4567"
+              }
             }
           }
         ],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           }
@@ -430,12 +627,13 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Supplier ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }

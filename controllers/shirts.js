@@ -1,10 +1,5 @@
 const createCRUDController = require('../utils/crudControllerFactory');
-const ObjectId = require('mongodb').ObjectId;
 
-// Factory creates: getAll, getSingle, delete
-const base = createCRUDController('shirts', 'id');
-
-// Custom data mapper for shirts (handles ObjectId conversion)
 const shirtDataMapper = (body) => ({
     productName: body.productName,
     sleeveLength: body.sleeveLength,
@@ -14,9 +9,11 @@ const shirtDataMapper = (body) => ({
     price: body.price,
     size: body.size,
     stockQuantity: body.stockQuantity,
-    supplierId: new ObjectId(body.supplierId),
-    categoryId: new ObjectId(body.categoryId)
+    supplierId: body.supplierId,
+    categoryId: body.categoryId
 });
+
+const base = createCRUDController('shirts', 'id');
 
 module.exports = {
     getAll: base.getAll,

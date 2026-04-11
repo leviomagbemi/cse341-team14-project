@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./models/db'); // We will create this file next
-const passport = require('passport');
+const { passport } = require('./middleware/passport');
 const session = require('express-session');
-const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
 const AppError = require('./errors/AppErrors');
@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 app
     .use(bodyParser.json())
     .use(session({
-        secret: "secret", // Use a .env variable in production
+        secret: process.env.SESSION_SECRET || "secret",
         resave: false,
         saveUninitialized: true,
     }))
@@ -36,20 +36,6 @@ app.use((req, res, next) => {
 
 // Global Error Handling Middleware - Must be LAST
 app.use(errorHandler);
-
-// Passport Setup (Reuse your logic from the last project here)
-passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.CALLBACK_URL
-},
-    function (accessToken, refreshToken, profile, done) {
-        return done(null, profile);
-    }
-));
-
-passport.serializeUser((user, done) => { done(null, user); });
-passport.deserializeUser((user, done) => { done(null, user); });
 
 // Database Connection & Server Start
 mongodb.initDb((err) => {

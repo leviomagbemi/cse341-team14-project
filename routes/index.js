@@ -1,28 +1,36 @@
 const express = require('express');
 const router = express.Router();
+const { ensureAuthenticated } = require('../middleware/authenticate');
 
 // Import the sub-routers for each collection and auth
 const shirtRouter = require('./shirts');
 const orderRouter = require('./orders');
 const categoryRouter = require('./categories');
 const supplierRouter = require('./suppliers');
-// const authRouter = require('./auth'); // For login/logout
+const authRouter = require('./auth');
 
-// 1. Documentation Route (Swagger)
+// 1. Authentication Routes (public)
+router.use('/auth', authRouter);
+
+// 2. Documentation Route (Swagger) - public access
 router.use('/', require('./swagger'));
 
-// 2. Authentication Routes
-// router.use('/auth', authRouter);
-
-// 3. Collection Routes
-router.use('/shirts', /* #swagger.tags = ['Shirts'] */ shirtRouter);
-router.use('/orders', /* #swagger.tags = ['Orders'] */ orderRouter);
-router.use('/categories', /* #swagger.tags = ['Categories'] */ categoryRouter);
-router.use('/suppliers', /* #swagger.tags = ['Suppliers'] */ supplierRouter);
-
-// Root route
+// 3. Root route to show API links and login status
 router.get('/', (req, res) => {
-    res.send('Logged out');
+    res.json({
+        message: "Storekeeper API is running.",
+        documentation: "/api-docs",
+        login: "/auth/github",
+        logout: "/auth/logout",
+        authenticationStatus: "/auth/status",
+        userStatus: req.isAuthenticated && req.isAuthenticated() ? `Logged in as ${req.user.displayName}` : "Logged out"
+    });
 });
+
+// 4. Protect all API collection routes
+router.use('/shirts', ensureAuthenticated, shirtRouter);
+router.use('/orders', ensureAuthenticated, orderRouter);
+router.use('/categories', ensureAuthenticated, categoryRouter);
+router.use('/suppliers', ensureAuthenticated, supplierRouter);
 
 module.exports = router;
