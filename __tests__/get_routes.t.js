@@ -8,6 +8,13 @@ app.use(express.json());
 app.use('/', router);
 
 jest.mock('../models/db');
+jest.mock('../middleware/authenticate', () => ({
+    ensureAuthenticated: (req, res, next) => next(),
+    ensureGithubOAuthConfigured: (req, res, next) => next()
+}));
+jest.mock('../middleware/existenceValidate', () => {
+    return () => (req, res, next) => next();
+});
 
 const mockData = [
     { _id: '65cc62d78a045768911c589d', name: 'Test Item A' },
@@ -73,7 +80,9 @@ describe('POST/PUT/DELETE Routes - Shirts', () => {
         color: "Blue",
         price: 45,
         size: "L",
-        stockQuantity: 50
+        stockQuantity: 50,
+        supplierId: "507f1f77bcf86cd799439012",
+        categoryId: "507f1f77bcf86cd799439014"
     };
 
     test('POST /shirts should return 201', async () => {
@@ -82,11 +91,11 @@ describe('POST/PUT/DELETE Routes - Shirts', () => {
         expect(res.statusCode).toBe(201);
     });
 
-    test('PUT /shirts/:id should return 204', async () => {
+    test('PUT /shirts/:id should return 200', async () => {
         setupMockDb('shirts', null, { acknowledged: true, modifiedCount: 1 });
         const res = await request(app).put('/shirts/65cc62d78a045768911c589d').send(validShirt);
         if (res.statusCode === 500) console.log('PUT Error Body:', res.body);
-        expect(res.statusCode).toBe(204);
+        expect(res.statusCode).toBe(200);
     });
 
     test('DELETE /shirts/:id should return 200', async () => {

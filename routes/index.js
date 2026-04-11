@@ -15,9 +15,16 @@ router.use('/auth', authRouter);
 // 2. Documentation Route (Swagger) - public access
 router.use('/', require('./swagger'));
 
-// 3. Root route to show login status
+// 3. Root route to show API links and login status
 router.get('/', (req, res) => {
-    res.send(req.isAuthenticated ? (req.isAuthenticated() ? `Logged in as ${req.user.displayName}` : "Logged out") : "Logged out");
+    res.json({
+        message: "Storekeeper API is running.",
+        documentation: "/api-docs",
+        login: "/auth/github",
+        logout: "/auth/logout",
+        authenticationStatus: "/auth/status",
+        userStatus: req.isAuthenticated && req.isAuthenticated() ? `Logged in as ${req.user.displayName}` : "Logged out"
+    });
 });
 
 // 4. Protect all API collection routes

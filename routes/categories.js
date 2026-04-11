@@ -8,15 +8,15 @@ const schemas = require('../middleware/validator'); // Joi schemas
 router.get('/', /* #swagger.tags = ['Categories'] */ categoriesController.getAll);
 
 // GET single
-router.get('/:id', /* #swagger.tags = ['Categories'] */ categoriesController.getSingle);
+router.get('/:id', /* #swagger.tags = ['Categories'] */ /* #swagger.parameters['id'] = { description: 'Category ID', type: 'string', in: 'path', required: true } */ categoriesController.getSingle);
 
 // POST
-router.post('/', validate(schemas.category), /* #swagger.tags = ['Categories'] */ categoriesController.createCategory);
+router.post('/', validate(schemas.category), /* #swagger.tags = ['Categories'] */ /* #swagger.parameters['body'] = { in: 'body', description: 'Category payload', required: true, schema: { $ref: '#/definitions/Category', example: { categoryName: 'Summer Collection', description: 'Light and breathable shirts for warm weather', season: 'Summer' } } } */ categoriesController.createCategory);
 
 // PUT
-router.put('/:id', validate(schemas.category), /* #swagger.tags = ['Categories'] */ categoriesController.updateCategory);
+router.put('/:id', validate(schemas.category), /* #swagger.tags = ['Categories'] */ /* #swagger.parameters['id'] = { description: 'Category ID', type: 'string', in: 'path', required: true } */ /* #swagger.parameters['body'] = { in: 'body', description: 'Category update payload', required: true, schema: { $ref: '#/definitions/Category', example: { categoryName: 'Summer Collection', description: 'Light and breathable shirts for warm weather', season: 'Summer' } } } */ categoriesController.updateCategory);
 
 // DELETE
-router.delete('/:id', /* #swagger.tags = ['Categories'] */ categoriesController.deleteCategory);
+router.delete('/:id', /* #swagger.tags = ['Categories'] */ /* #swagger.parameters['id'] = { description: 'Category ID', type: 'string', in: 'path', required: true } */ categoriesController.deleteCategory);
 
 module.exports = router;
